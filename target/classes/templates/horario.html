@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+
+<title>Sisbusqdoc</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<!-- iconos fontawesome -->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+	crossorigin="anonymous">
+<!-- Custom styles for this template -->
+<link href="#" th:href="@{/css/style.css}" rel="stylesheet" />
+
+<link href="#" th:href="@{/css/horario.css}" rel="stylesheet" />
+
+<!-- Jquery -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+	<div class="container-fluid">
+
+		<div class="titulo">
+    		<h1>SISTEMA DE BUSQUEDA DOCENTE</h1>
+			<br />
+  		</div>
+		<div class="bloque">
+			<form class="form-inline">
+			<div class="form-group">
+				<input id="input" type="text" class="form-control" name="busqueda"
+					placeholder="Codigo o nombre">
+			</div>
+			<!--  <button class="btn btn-primary ml-2 btn-sm" type="submit">Buscar</button> -->
+			<div class="input-group ml-2">
+				<select id="select" class="custom-select" name="tipo">
+					<option th:each="valor:${tipoBusqueda}" th:value="${valor}"
+						th:text="${valor}"></option>
+				</select>
+				<div class="input-group-append">
+					<button class="btn btn-dark" type="submit">Buscar</button>
+				</div>
+			</div>
+			<a href="#" th:href="@{/horarios/mostrarHorarios}">
+				<button type="button" class="btn btn-dark ml-2">Mostrar
+					todo</button>
+			</a>
+			
+			<a href="#" th:href="@{/horarios/crearPDF}">
+				<button type="button" class="btn btn-dark ml-2">
+					<i class="fa fa-file-pdf"></i> Descargar en PDF
+				</button>
+			</a>
+
+			</form>
+			<script type="text/javascript" th:inline="javascript">
+			var select_designatfirst = $('#select'), empSearch = $('#input');
+
+			select_designatfirst.on('change', function() {
+				if(select_designatfirst.find(':selected').text().localeCompare("profesor"){
+					empSearch.attr('placeholder', "Codigo o nombre");
+				} else if(select_designatfirst.find(':selected').text().localeCompare("curso"){
+					empSearch.attr('placeholder', "Curso");
+				} else if(select_designatfirst.find(':selected').text().localeCompare("dia"){
+					empSearch.attr('placeholder', "Dia");
+				}
+			}				
+						
+			});
+			</script>
+			
+			<a href="#" th:href="@{/login?logout}">
+				<button class="btn btn-primary" type="submit">
+					<i class="fa fa-door-open"></i> Logout
+				</button>
+			</a>
+			
+		</div>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading"></div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Profesor</th>
+						<th>Curso</th>
+						<th>Tipo</th>
+						<th>Grupo</th>
+						<th>Aula</th>
+						<th>Dia</th>
+						<th>Horario</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="horario : ${horarios}">
+						<td
+							th:text="${horario.docente.persona.apellidoPaterno + ' ' + horario.docente.persona.apellidoMaterno + ' ' + horario.docente.persona.nombre}"></td>
+						<td th:text="${horario.grupo.curso.nombre}"></td>
+						<td th:text="${horario.tipoHorario}"></td>
+						<td th:text="${horario.grupo.numeroCurso}"></td>
+						<td th:text="${horario.aula}"></td>
+						<td th:text="${horario.diaTexto}"></td>
+						<td th:text="${horario.horaInicio + ' - ' + horario.horaFin}"></td>
+
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+</body>
+</html>

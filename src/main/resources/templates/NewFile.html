@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<title>Insert title here</title>
+
+</head>
+<body>
+	<select id="select_designatfirst" title="Select Designation">
+		<option value="0">All Employees</option>
+		<option value="1">Company Admin</option>
+		<option value="2">Marketing Manager</option>
+		<option value="3">Product Manager</option>
+	</select>
+	<input type="text" class="form-control" id="empSearch"
+		placeholder="Search All Employees">
+	<script type="text/javascript">
+	var select_designatfirst = $('#select_designatfirst'), empSearch = $('#empSearch');
+
+	select_designatfirst.on('change', function() {
+		empSearch.attr('placeholder', 'Search '
+				+ select_designatfirst.find(':selected').text());
+	});
+</script>
+</body>
+</html>

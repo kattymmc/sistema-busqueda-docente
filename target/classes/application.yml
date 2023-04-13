@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: 
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate: 
+      ddl-auto: create-drop
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
